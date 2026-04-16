@@ -1,20 +1,13 @@
-workers = 3
+import os
 
-# Уровень логирования
+workers = 1          # для eventlet рекомендуется 1 воркер
+worker_class = 'eventlet'
+timeout = 30
 loglevel = 'info'
-
-# Формат логов доступа
 access_log_format = '%(h)s %(r)s %(s)s %(b)s %(f)s %(p)s'
-
-# Путь к файлу логов
 accesslog = 'gunicorn_access.log'
 errorlog = 'gunicorn_error.log'
 
-# Название и порт
-bind = '0.0.0.0:8080'
-
-# Использование asyncio-воркера или другого
-worker_class = 'eventlet'
-
-# Время ожидания
-timeout = 30
+# Берём порт из переменной окружения, по умолчанию 8080
+port = os.environ.get('PORT', '8080')
+bind = f'0.0.0.0:{port}'
