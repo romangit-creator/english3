@@ -1,3 +1,5 @@
+from eventlet import monkey_patch
+monkey_patch()
 import json
 import random
 from flask import Flask, render_template
